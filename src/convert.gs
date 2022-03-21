@@ -1,20 +1,27 @@
-function convertByActiveSpreadsheet(){
-  return convert(SpreadsheetApp.getActiveSpreadsheet());
+function convertByActiveSpreadsheet(languageKey){
+  return convert(SpreadsheetApp.getActiveSpreadsheet(),languageKey);
 }
-function convertById(id){
-  return convert(SpreadsheetApp.openById(id));
+function convertById(id,languageKey){
+  return convert(SpreadsheetApp.openById(id),languageKey);
 }
-function convert(spreadsheet){
+/**
+ * @param {SpreadsheetApp.Spreadsheet} spreadsheet
+ */
+function convert(spreadsheet,languageKey){
   let output = ""
-  let language = 2;
   console.log("処理するファイル名:" + spreadsheet.getName());
   let sheets = spreadsheet.getSheets()
   sheets.forEach(sheet =>{
   var rows = sheet.getDataRange().getValues();
-  let head = rows[0][1]
-  for(let i = 2;i<rows.length;i++){
-    output += '"' + head + '-' + rows[i][0] + '" = "' + rows[i][language]+'";\n'
-  }
+  let sheetHead = rows[0][1];
+  let dataHeads = rows[1];
+  let languageIdx = dataHeads.indexOf(languageKey);
+    if (languageIdx > -1){
+      let data = rows.slice(2);
+      data.forEach(row=>{
+        output += `"${sheetHead}-${row[0]}" = "${row[languageIdx]}";\n`;
+      })
+    }
   });
   var out = ContentService.createTextOutput(output);
   Logger.log(out.getContent());
