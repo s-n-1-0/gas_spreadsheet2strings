@@ -8,7 +8,7 @@ function convertById(id,languageKey){
  * @param {SpreadsheetApp.Spreadsheet} spreadsheet
  */
 function convert(spreadsheet,languageKey){
-  let output = ""
+  let output = `"language" = "${languageKey}";\n`;
   console.log("処理するファイル名:" + spreadsheet.getName());
   let sheets = spreadsheet.getSheets()
   sheets.forEach(sheet =>{
