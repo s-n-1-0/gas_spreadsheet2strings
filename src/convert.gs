@@ -1,8 +1,14 @@
-function convert(id){
+function convertByActiveSpreadsheet(){
+  return convert(SpreadsheetApp.getActiveSpreadsheet());
+}
+function convertById(id){
+  return convert(SpreadsheetApp.openById(id));
+}
+function convert(spreadsheet){
   let output = ""
   let language = 2;
-  console.log("処理するファイル名:" + SpreadsheetApp.openById(id).getName());
-  let sheets = SpreadsheetApp.openById(id).getSheets()
+  console.log("処理するファイル名:" + spreadsheet.getName());
+  let sheets = spreadsheet.getSheets()
   sheets.forEach(sheet =>{
   var rows = sheet.getDataRange().getValues();
   let head = rows[0][1]
