@@ -23,12 +23,12 @@ srcフォルダ内にあるGASコードをApps Scriptプロジェクトに追加
 次のどちらかを実行またはデプロイ(第二引数は言語名)
 ```js
 function doGet(){
-  return convertByActiveSpreadsheet("ja");
+  return convertTextOutputByActiveSpreadsheet("ja");
 }
 ```
 ```js
 function doGet(){
-  return convertById("file id","ja");
+  return convertTextOutputById("file id","ja");
 }
 ```
 
