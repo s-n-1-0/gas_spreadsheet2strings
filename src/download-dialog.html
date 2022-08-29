@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script type='text/javascript'>
+      function handleDownload(lang,bp) {
+        var link = document.createElement('a');
+        let blob = new Blob([bp], { "type" : "application/json"});
+        // ファイル名を GAS から取得する
+        link.download = lang + ".strings";
+        link.href = window.URL.createObjectURL(blob);
+        link.click();
+        // ダイアログを閉じる
+        google.script.host.close();
+      }
+      function downloadJa(){
+        let bp = '<?= getStringsByMenu("ja") ?>';
+        handleDownload("ja",bp); 
+      }
+      function downloadEn(){
+        let bp = '<?= getStringsByMenu("en") ?>';
+        handleDownload("en",bp); 
+      }
+    </script>
+  </head>
+  <body>
+    json形式にまとめてダウンロードします。
+    <ul>
+      <li><button onclick="downloadJa()">日本語</button></li>
+      <li><button onclick="downloadEn()">英語</button></li>
+    </ul>
+  </body>
+</html>
