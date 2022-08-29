@@ -19,6 +19,7 @@ GASを使用してスプレッドシートをstringsファイルに変換しま�
 
 ## 使い方
 srcフォルダ内にあるGASコードをApps Scriptプロジェクトに追加。
+### デプロイする場合
 次のどちらかを実行またはデプロイ(第二引数は言語名)
 ```js
 function doGet(){
@@ -30,3 +31,8 @@ function doGet(){
   return convertById("file id","ja");
 }
 ```
+
+### スプレッドシートメニューから翻訳を主力する場合
+![](https://i.gyazo.com/1d425b073d9d55d235ec53aa2d9067c6.png)
+download-dialog.htmlのdownload関数を良い感じに調整してください。
+(getStringsByMenu関数の引数は各シート2行目に指定した言語名です)
